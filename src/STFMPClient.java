@@ -14,7 +14,7 @@ public class STFMPClient {
             // Send request to the server
             System.out.println("Send data to the server");
 
-            STFMPRequest request = new STFMPRequest(Constants.PROTOCOL_VERSION,STFMPActions.WRITE,"result_1.txt","Selected Topic Network");
+            STFMPRequest request = new STFMPRequest(Constants.PROTOCOL_VERSION,STFMPActions.CLOSE,"result_1.txt","Selected Topic Network");
             OutputStream outputStream = connection.getOutputStream();
             PrintWriter printWriter = new PrintWriter(outputStream);
             //Encryption
@@ -29,11 +29,10 @@ public class STFMPClient {
             Scanner scanner = new Scanner(inputStream);
             System.out.println("Receiving from server...");
             String encryptedResponse = scanner.nextLine();
-            System.out.println("Receiving from server...");
             //Decryption
             String rawResponse = Constants.DECRYPTE(encryptedResponse);
             STFMPResponse response = STFMPResponse.fromRawString(rawResponse);
-            System.out.println("The result is:" + response.getMessage());
+            System.out.println("The result is: " + response.getMessage());
 
             scanner.close();
             connection.close();

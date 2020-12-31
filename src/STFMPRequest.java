@@ -39,7 +39,7 @@ public class STFMPRequest {
     }
 
     public String toString(){
-        String requestLine = protocolVersion+"##"+action+"##"+filename+"#"+content;
+        String requestLine = protocolVersion+"##"+action+"##"+filename+"#"+content+"\r\n";
 
         return requestLine;
     }

@@ -13,7 +13,7 @@ public class Constants {
             tmp.append((char)(b64encoded.charAt(i)+OFFSET));
         }
         String encrypt = tmp.toString();
-        return encrypt;
+        return encrypt+"\r\n";
     }
 
     public static String DECRYPTE(String encryptedString){
@@ -27,6 +27,6 @@ public class Constants {
 
         String rawString = new String(Base64.getDecoder().decode(encrypted));
 
-        return rawString;
+        return rawString+"\r\n";
     }
 }

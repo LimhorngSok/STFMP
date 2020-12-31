@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+
 public class STFMPServer {
     public static void main(String[] args) {
         try(ServerSocket serverSocket = new ServerSocket(9999)) {
@@ -23,10 +24,10 @@ public class STFMPServer {
                 Scanner scanner = new Scanner(inputStream);
                 //Get Encryption
                 String encryptedRequest = scanner.nextLine();
-                System.out.println("Receiving:"+encryptedRequest);
+                System.out.println("Receiving: "+encryptedRequest);
                 //Decryption
                 String rawRequest = Constants.DECRYPTE(encryptedRequest);
-                System.out.println("Decrypting:"+rawRequest);
+                System.out.println("Decrypting: "+rawRequest);
                 //Creating Request
                 STFMPRequest request = STFMPRequest.fromRawString(rawRequest);
                 System.out.println("Send response to client");
@@ -37,6 +38,7 @@ public class STFMPServer {
                     STFMPView(connection,request);
                 }else if(request.getAction().equals(STFMPActions.CLOSE)){
                     STFMPClose(connection,scanner,inputStream);
+                    break;
                 }
             }
 
@@ -50,7 +52,7 @@ public class STFMPServer {
         OutputStream outputStream = connection.getOutputStream();
         PrintWriter printWriter = new PrintWriter(outputStream);
         String encryptedResponse = Constants.ENCRYPTE(response.toString());
-        System.out.println("Encrypting:"+encryptedResponse);
+        System.out.println("Responding: "+encryptedResponse);
         printWriter.write(encryptedResponse);
         printWriter.flush();
     }
@@ -90,7 +92,7 @@ public class STFMPServer {
 
     private static void STFMPClose(Socket connection, Scanner scanner,InputStream inputStream) throws IOException {
         System.out.println("Connection is closed");
-        STFMPResponse response = new STFMPResponse(Constants.PROTOCOL_VERSION,STFMPStatus.NOT_FOUND,STFMPMessage.NOT_FOUND);
+        STFMPResponse response = new STFMPResponse(Constants.PROTOCOL_VERSION,STFMPStatus.OK,STFMPMessage.CLOSE);
         sendResponse(connection,response);
         scanner.close();
         inputStream.close();

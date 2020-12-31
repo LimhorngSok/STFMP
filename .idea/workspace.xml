@@ -3,14 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="cf8f8ef6-ee5f-4c5a-877b-bc28ae094f48" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Constants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/STFMPMessage.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/STFMPStatus.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/STFMPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/STFMPClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/STFMPMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/STFMPMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/STFMPRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/STFMPRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/STFMPResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/STFMPResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/STFMPSever.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/STFMPServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/STFMPServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/STFMPServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
