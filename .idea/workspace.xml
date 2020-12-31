@@ -6,6 +6,7 @@
       <change afterPath="$PROJECT_DIR$/src/STFMPStatus.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/STFMPActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/STFMPActions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/STFMPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/STFMPClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/STFMPMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/STFMPMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/STFMPRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/STFMPRequest.java" afterDir="false" />

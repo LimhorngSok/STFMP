@@ -14,7 +14,7 @@ public class STFMPClient {
             // Send request to the server
             System.out.println("Send data to the server");
 
-            STFMPRequest request = new STFMPRequest(Constants.PROTOCOL_VERSION,STFMPActions.CLOSE,"result_1.txt","Selected Topic Network");
+            STFMPRequest request = new STFMPRequest(Constants.PROTOCOL_VERSION,STFMPActions.VIEW,"result_1.txt",null);
             OutputStream outputStream = connection.getOutputStream();
             PrintWriter printWriter = new PrintWriter(outputStream);
             //Encryption
