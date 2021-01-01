@@ -25,11 +25,8 @@ public class STFMPServer {
                 //Get Encryption
                 String encryptedRequest = scanner.nextLine();
                 System.out.println("Receiving: "+encryptedRequest);
-                //Decryption
-                String rawRequest = Constants.DECRYPTE(encryptedRequest);
-                System.out.println("Decrypting: "+rawRequest);
                 //Creating Request
-                STFMPRequest request = STFMPRequest.fromRawString(rawRequest);
+                STFMPRequest request = STFMPRequest.fromEncryptedString(encryptedRequest);
                 System.out.println("Send response to client");
 
                 if(request.getAction().equals(STFMPActions.WRITE)){
@@ -51,20 +48,22 @@ public class STFMPServer {
     private static void sendResponse(Socket connection,STFMPResponse response) throws IOException {
         OutputStream outputStream = connection.getOutputStream();
         PrintWriter printWriter = new PrintWriter(outputStream);
-        String encryptedResponse = Constants.ENCRYPTE(response.toString());
+        String encryptedResponse = response.encryptedResponse();
         System.out.println("Responding: "+encryptedResponse);
         printWriter.write(encryptedResponse);
         printWriter.flush();
     }
 
     private static void STFMPWrite(Socket connection, STFMPRequest request) throws IOException{
-        System.out.println("Writing");
+
         STFMPResponse response;
-        String filename = request.getFilename();
-        String content = request.getContent();
-        if (filename == null || content == null) {
+        String params = request.getParams();
+        if (params.split("#").length != 2) {
             response = new STFMPResponse(Constants.PROTOCOL_VERSION,STFMPStatus.INVALID,STFMPMessage.INVALID);
         }else{
+            System.out.println("Writing...");
+            String filename = request.getFilename();
+            String content = request.getContent();
             STFMPActions.writeFile(filename, content);
             response = new STFMPResponse(Constants.PROTOCOL_VERSION,STFMPStatus.OK,STFMPMessage.SUCCESS);
         }
@@ -74,10 +73,13 @@ public class STFMPServer {
     private static void STFMPView(Socket connection, STFMPRequest request) throws IOException {
         System.out.println("Searching");
         STFMPResponse response;
-        String filename = request.getFilename();
-        if (filename == null ) {
+        String params = request.getParams();
+
+        if (params.split("#").length !=  1 || params.split("#")[0] == null) {
             response = new STFMPResponse(Constants.PROTOCOL_VERSION,STFMPStatus.INVALID,STFMPMessage.INVALID);
         }else{
+            String filename = request.getFilename();
+            filename = filename.trim();
             if(STFMPActions.searchFile(filename) == 200){
                 String content = STFMPActions.readFile(filename);
                 response = new STFMPResponse(Constants.PROTOCOL_VERSION,STFMPStatus.OK,content);

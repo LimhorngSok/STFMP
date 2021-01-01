@@ -4,14 +4,14 @@ import static java.lang.Integer.parseInt;
 
 public class STFMPResponse {
     private String status;
-    private String message;
+    private String data;
     private String protocolVersion;
 
 
-    public STFMPResponse(String protocolVersion,String status, String message){
+    public STFMPResponse(String protocolVersion,String status, String data){
         this.protocolVersion = protocolVersion;
         this.status = status;
-        this.message = message;
+        this.data = data;
 
     }
 
@@ -20,25 +20,27 @@ public class STFMPResponse {
     }
 
     public String getMessage() {
-        return message;
+        return data;
     }
 
     public String getProtocolVersion() {
         return protocolVersion;
     }
 
-    public String toString(){
-        String responseLine = protocolVersion+"##"+status+"##"+message+"\r\n";
-
+    public String encryptedResponse(){
+        String responseLine = protocolVersion+"##"+status+"##"+data+"\r\n";
+        responseLine = Constants.ENCRYPTE(responseLine);
         return responseLine;
     }
 
-    public static STFMPResponse fromRawString(String rawString){
-        String[] parts = rawString.split("##");
+    public static STFMPResponse fromEncryptedString(String encryptedResponse){
+        String decryptedResponse = Constants.DECRYPTE(encryptedResponse);
+        System.out.println("Decrypting: "+decryptedResponse);
+        String[] parts = decryptedResponse.split("##");
         String protocolVersion = parts[0];
         String status = parts[1];
-        String message = parts[2];
+        String data = parts[2];
 
-        return new STFMPResponse(protocolVersion,status,message);
+        return new STFMPResponse(protocolVersion,status,data);
     }
 }
