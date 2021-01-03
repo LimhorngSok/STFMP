@@ -27,14 +27,13 @@ public class STFMPResponse {
         return protocolVersion;
     }
 
-    public String encryptedResponse(){
+    public String rawResponse(){
         String responseLine = protocolVersion+"##"+status+"##"+data+"\r\n";
-        responseLine = Constants.ENCRYPTE(responseLine);
         return responseLine;
     }
 
-    public static STFMPResponse fromEncryptedString(String encryptedResponse){
-        String decryptedResponse = Constants.DECRYPTE(encryptedResponse);
+    public static STFMPResponse decryptResponse(String encryptedResponse, int key){
+        String decryptedResponse = Constants.DECRYPT(encryptedResponse, key);
         System.out.println("Decrypting: "+decryptedResponse);
         String[] parts = decryptedResponse.split("##");
         String protocolVersion = parts[0];

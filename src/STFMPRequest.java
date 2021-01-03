@@ -48,9 +48,8 @@ public class STFMPRequest {
         return params;
     }
 
-    public String encryptedRequest(){
+    public String rawRequest(){
         String requestLine = protocolVersion+"##"+action+"##"+params+"\r\n";
-        requestLine = Constants.ENCRYPTE(requestLine);
         return requestLine;
     }
 
@@ -62,8 +61,8 @@ public class STFMPRequest {
         this.content = content;
     }
 
-    public static STFMPRequest fromEncryptedString(String encryptedRequest){
-       String rawRequest = Constants.DECRYPTE(encryptedRequest);
+    public static STFMPRequest decryptRequest(String encryptedRequest, int key){
+       String rawRequest = Constants.DECRYPT(encryptedRequest, key);
        System.out.println("Decrypting: "+rawRequest);
        String[] parts = rawRequest.split("##");
        String protocolVersion = parts[0];

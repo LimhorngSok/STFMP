@@ -5,19 +5,25 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 
 
 public class STFMPServer {
+    private static int KEY = 0;
     public static void main(String[] args) {
         try(ServerSocket serverSocket = new ServerSocket(9999)) {
+            System.out.println("Waiting to accept a client");
+            Socket connection = serverSocket.accept();
 
+            //Send Encryption Key
+            if(KEY == 0){
+                sendKey(connection);
+            }
             System.out.println("Bind to port 9999");
-
             while (true){
-                System.out.println("Waiting to accept a client");
-                Socket connection = serverSocket.accept();
+
+
 
                 System.out.println("Read request from the clients");
                 InputStream inputStream = connection.getInputStream();
@@ -26,7 +32,7 @@ public class STFMPServer {
                 String encryptedRequest = scanner.nextLine();
                 System.out.println("Receiving: "+encryptedRequest);
                 //Creating Request
-                STFMPRequest request = STFMPRequest.fromEncryptedString(encryptedRequest);
+                STFMPRequest request = STFMPRequest.decryptRequest(encryptedRequest,KEY);
                 System.out.println("Send response to client");
 
                 if(request.getAction().equals(STFMPActions.WRITE)){
@@ -48,7 +54,8 @@ public class STFMPServer {
     private static void sendResponse(Socket connection,STFMPResponse response) throws IOException {
         OutputStream outputStream = connection.getOutputStream();
         PrintWriter printWriter = new PrintWriter(outputStream);
-        String encryptedResponse = response.encryptedResponse();
+        String rawResponse = response.rawResponse();
+        String encryptedResponse = Constants.ENCRYPT(rawResponse, KEY);
         System.out.println("Responding: "+encryptedResponse);
         printWriter.write(encryptedResponse);
         printWriter.flush();
@@ -99,6 +106,22 @@ public class STFMPServer {
         scanner.close();
         inputStream.close();
         connection.close();
+    }
+
+    private static int randomKey(){
+        int key;
+        Random random = new Random();
+        key = random.nextInt(9)+1;
+        return key;
+    }
+
+    private static void sendKey(Socket connection) throws IOException {
+        OutputStream outputStream = connection.getOutputStream();
+        PrintWriter printWriter = new PrintWriter(outputStream);
+        KEY = randomKey();
+        printWriter.write(KEY+"\r\n");
+        System.out.println("Sending Key:" + KEY);
+        printWriter.flush();
     }
 
 }

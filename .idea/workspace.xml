@@ -2,12 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1566dc5e-f323-4155-9019-2f91178e0143" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/STFMP/STFMPClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/STFMP/STFMPClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/STFMP/STFMPRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/STFMP/STFMPRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/STFMP/STFMPResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/STFMP/STFMPResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/STFMP/STFMPServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/STFMP/STFMPServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshot/client_close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshot/client_view.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshot/client_write.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshot/created_files.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshot/result.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshot/server_close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshot/server_view.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshot/server_write.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/STFMPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/STFMPClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/STFMPRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/STFMPRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/STFMPResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/STFMPResponse.java" afterDir="false" />
@@ -79,5 +84,22 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/STFMPServer.java</url>
+          <line>11</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/STFMPClient.java</url>
+          <line>7</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
