@@ -32,9 +32,10 @@ public class STFMPResponse {
         return responseLine;
     }
 
-    public static STFMPResponse decryptResponse(String encryptedResponse, int key){
-        String decryptedResponse = Constants.DECRYPT(encryptedResponse, key);
-        System.out.println("Decrypting: "+decryptedResponse);
+    public static STFMPResponse decryptResponse(String encryptedResponse){
+//        String decryptedResponse = Constants.DECRYPT(encryptedResponse, key);
+        String decryptedResponse = encryptedResponse;
+//        System.out.println("Decrypting: "+decryptedResponse);
         String[] parts = decryptedResponse.split("##");
         String protocolVersion = parts[0];
         String status = parts[1];

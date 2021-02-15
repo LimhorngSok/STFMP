@@ -1,3 +1,5 @@
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -5,55 +7,38 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class STFMPClient {
-    private static int KEY = 0;
-    private static boolean CONNECTION;
-    public static void main(String[] args) {
-        try (Socket connection = new Socket("localhost", 9999);){
-            CONNECTION = true;
-            System.out.println("The connection to the server was established.");
-            if(KEY == 0){
-                getKey(connection);
+public class STFMPSecureClient {
+
+    public static void main(String[] args) throws IOException {
+        System.setProperty("javax.net.ssl.trustStore","certificate/horng-trust-store.cacerts");
+        System.setProperty("javax.net.ssl.trustStorePassword","123123123");
+
+        SSLSocketFactory sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+        SSLSocket connection = (SSLSocket) sslSocketFactory.createSocket("localhost",9999);
+
+        while (true){
+            System.out.println("Choose one of the options below:");
+            System.out.println("1. Write file");
+            System.out.println("2. View file");
+            System.out.println("3. Close connection");
+
+            System.out.println("Your input:");
+            Scanner userInput = new Scanner(System.in);
+            int option = userInput.nextInt();
+            //Get Key
+
+            switch(option){
+                case 1:
+                    writeFile(connection);
+                    break;
+                case 2:
+                    viewFile(connection);
+                    break;
+                case 3:
+                    closeConnection(connection);
+                    break;
             }
-            while (CONNECTION == true){
-                System.out.println("Choose one of the options below:");
-                System.out.println("1. Write file");
-                System.out.println("2. View file");
-                System.out.println("3. Close connection");
-
-                System.out.println("Your input:");
-                Scanner userInput = new Scanner(System.in);
-                int option = userInput.nextInt();
-                //Get Key
-
-                switch(option){
-                    case 1:
-                        writeFile(connection);
-                        break;
-                    case 2:
-                        viewFile(connection);
-                        break;
-                    case 3:
-                        closeConnection(connection);
-                        CONNECTION = false;
-                        break;
-                }
-            }
-
-
-        } catch (IOException e) {
-            System.out.println("Cannot connect to the server. " + e.getMessage());
         }
-    }
-
-    private static void getKey(Socket connection) throws IOException {
-        InputStream getInputKey = connection.getInputStream();
-        System.out.println("Receiving a key from server...");
-        Scanner getKey = new Scanner(getInputKey);
-        KEY = Integer.parseInt(getKey.nextLine());
-        System.out.println("Received Key: " + KEY);
-
-
     }
     private static void writeFile(Socket connection) throws IOException {
         //GET FILE NAME AND CONTENT
@@ -72,10 +57,10 @@ public class STFMPClient {
         PrintWriter printWriter = new PrintWriter(outputStream);
         //Encryption
         String rawRequest = request.rawRequest();
-        String encryptedRequest = Constants.ENCRYPT(rawRequest,KEY);
-        printWriter.write(encryptedRequest);
+//        String encryptedRequest = Constants.ENCRYPT(rawRequest,2);
+        printWriter.write(rawRequest);
         printWriter.flush();
-        System.out.println("Requesting:" + encryptedRequest);
+        System.out.println("Requesting:" + rawRequest);
 
         getResponse(connection);
     }
@@ -94,10 +79,10 @@ public class STFMPClient {
         PrintWriter printWriter = new PrintWriter(outputStream);
         //Encryption
         String rawRequest = request.rawRequest();
-        String encryptedRequest = Constants.ENCRYPT(rawRequest,KEY);
-        printWriter.write(encryptedRequest);
+//        String encryptedRequest = Constants.ENCRYPT(rawRequest,2);
+        printWriter.write(rawRequest);
         printWriter.flush();
-        System.out.println("Requesting:" + encryptedRequest);
+        System.out.println("Requesting:" + rawRequest);
 
         getResponse(connection);
     }
@@ -111,10 +96,10 @@ public class STFMPClient {
         PrintWriter printWriter = new PrintWriter(outputStream);
         //Encryption
         String rawRequest = request.rawRequest();
-        String encryptedRequest = Constants.ENCRYPT(rawRequest,KEY);
-        printWriter.write(encryptedRequest);
+//        String encryptedRequest = Constants.ENCRYPT(rawRequest,2);
+        printWriter.write(rawRequest);
         printWriter.flush();
-        System.out.println("Requesting:" + encryptedRequest);
+        System.out.println("Requesting:" + rawRequest);
 
         getResponse(connection);
         connection.close();
@@ -133,6 +118,4 @@ public class STFMPClient {
 
 
     }
-
-
 }

@@ -61,9 +61,10 @@ public class STFMPRequest {
         this.content = content;
     }
 
-    public static STFMPRequest decryptRequest(String encryptedRequest, int key){
-       String rawRequest = Constants.DECRYPT(encryptedRequest, key);
-       System.out.println("Decrypting: "+rawRequest);
+    public static STFMPRequest decryptRequest(String encryptedRequest){
+//       String rawRequest = Constants.DECRYPT(encryptedRequest, key);
+        String rawRequest = encryptedRequest;
+//       System.out.println("Decrypting: "+rawRequest);
        String[] parts = rawRequest.split("##");
        String protocolVersion = parts[0];
        String action = parts[1];
